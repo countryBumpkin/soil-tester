@@ -20,14 +20,14 @@ float Teros10::readVoltage(){
 	digitalWrite(this->pwr_pin, HIGH);
 	delay(10);
 
-	int output = analogRead(this->pin); // read a value 0 - 1023 and convert to voltage
+	int output = analogRead(this->analog_pin); // read a value 0 - 1023 and convert to voltage
 	return output;
 
 	digitalWrite(this->pwr_pin, LOW);
 
 }
 
-// read the sensor and return the VWC as a decimal which represents the VWC as a percentage
+// read the sensor and return the VWC as a decimal which represents the VWC on the range 0 - 0.77 m^3/m^3
 double Teros10::getVWC(SoilMedia media){
 	
 	float mv = readVoltage();
@@ -55,12 +55,11 @@ double Teros10::getVWC(SoilMedia media){
 	return output;
 }
 
-// read the sensor and return the VWC as a decimal which represents the VWC as a percentage
+// read the sensor and return the VWC as a decimal which represents the VWC on the range 0 - 0.77 m^3/m^3
 double Teros10::getVWC(SoilMedia media, double voltage){
 	
-	float mv = voltage;
+	double mv = voltage*1000;
 	double output;
-
 
 	if(media == MINERAL_SOIL){
 		double third_deg = 	0.0000000004824 * pow(mv, 3); 

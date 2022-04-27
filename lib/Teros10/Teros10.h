@@ -9,9 +9,10 @@ private:
 	int pwr_pin;	// pin that must be powered to read from the sensor
 
 public:
-	static enum SoilMedia {MINERAL_SOIL, SOILLESS};
+	enum SoilMedia {MINERAL_SOIL, SOILLESS};
 
-	Teros10(int pin);
+	Teros10(int analog_pin, int pwr_pin);
+	Teros10(){}
 	float readVoltage();					// read just the voltage measured by the sensor
 	double getVWC(SoilMedia media);			// read the sensor and return the VWC as a decimal which represents the VWC as a percentage
 	double getVWC(SoilMedia media, double voltage);
